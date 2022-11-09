@@ -18,6 +18,8 @@ public class Controller : MonoBehaviour
             return m_instance;
         }
     }
+    [SerializeField] private Score m_score;
+    public Score Score { get { return m_score; } set { m_score = value; } }
 
     [SerializeField] private LevelParameters m_level;
 
@@ -32,15 +34,12 @@ public class Controller : MonoBehaviour
     private Field m_field;
 
     private int m_currentLevel;
-    public int CurrentLevel
-    {
-        set { m_currentLevel = value; }
-        get { return m_currentLevel; }
-    }
+    public int CurrentLevel { set { m_currentLevel = value; } get { return m_currentLevel; } }
+
     public LevelParameters Level { get { return m_level; } set { m_level = value; } }
     public Field Field { get { return m_field; } set { m_field = value; } }
     public int FieldSize { get { return m_level.FieldSize; } }
-     public int TokenTypes { get { return m_level.TokenTypes; }  }
+    public int TokenTypes { get { return m_level.TokenTypes; } }
     public Color[] TokenColors { get { return m_tokenColors; } set { m_tokenColors = value; } }
 
     private List<List<Token>> m_tokensByTypes; // масив масивів для зберігання фішок, відсортованих за типами
@@ -167,6 +166,7 @@ public class Controller : MonoBehaviour
         if (IsAllTokensConnected())
         {
             Debug.Log("Win!");
+            Score.AddLevelBonus();
             m_currentLevel++;
             Destroy(m_field.gameObject);
             InitializeLevel();
@@ -176,8 +176,6 @@ public class Controller : MonoBehaviour
             Debug.Log("Continue...");
         }
     }
-
-
     public void InitializeLevel()
     {
         m_level = new LevelParameters(m_currentLevel);
@@ -220,3 +218,5 @@ public class Controller : MonoBehaviour
         transform.SetParent(Controller.Instance.Field.transform); /// тут непонятно отчего "наследуется" первый transform
     }
 }
+
+

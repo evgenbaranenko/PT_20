@@ -311,8 +311,16 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_score.m_turnScoreBonus
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
       propertyPath: m_tokenColors.Array.size
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_score.m_levelScoreBonus
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
       propertyPath: m_tokenColors.Array.data[0].b
