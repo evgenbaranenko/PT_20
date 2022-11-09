@@ -227,12 +227,21 @@ public class Controller : MonoBehaviour
         Audio.SourceRandomPitchSFX = gameObject.AddComponent<AudioSource>();
         Audio.SourceSFX = gameObject.AddComponent<AudioSource>();
     }
+
+    //скидае прогрес гри
+    public void Reset()
+    {
+        CurrentLevel = 1;
+
+        Score.CurrentScore = 0;
+
+        Destroy(m_field.gameObject);
+
+        InitializeLevel();
+    }
+
     private void Start()
     {
-        
-
         Audio.PlayMusic(true);
     }
 }
-
-

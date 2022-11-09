@@ -25,4 +25,28 @@ public class Hud : MonoBehaviour
     {
         m_scoreValue.text = value.ToString();
     }
+    public void ShowWindow(CanvasGroup window)
+    {
+        window.alpha = 1f;
+
+        window.blocksRaycasts = true;
+
+        window.interactable = true;
+    }
+    public void HideWindow(CanvasGroup window)
+    {
+        window.alpha = 0f;
+
+        window.blocksRaycasts = false;
+
+        window.interactable = false;
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    public void Reset()
+    {
+        Controller.Instance.Reset();
+    }
 }
