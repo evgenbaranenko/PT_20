@@ -15,6 +15,8 @@ public class Token : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     private int m_tokenType;
 
+    private AudioSource m_audioSource;
+
     // викликається тоді, коли користувач клікнув на об'єкт
     // і з натиснутою кнопкою потягнув курсор кубік
 
@@ -23,10 +25,13 @@ public class Token : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     public void OnBeginDrag(PointerEventData eventData)
     {
         GetDragSpace();
+
         //Фіксуємо початкове положення фішки та пойнтера
         //(курсор чи палець)
         m_pointerPositionBeforeDrag = m_camera.ScreenToWorldPoint(eventData.position);
         m_positionBeforeDrag = transform.position;
+
+        m_audioSource.Play();
     }
 
     #region OnDrag(Explanation)
@@ -35,6 +40,8 @@ public class Token : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     #endregion
     public void OnDrag(PointerEventData eventData)
     {
+        Vector3 previousPosition = transform.position;
+
         Vector3 mouseWorldPosition = m_camera.ScreenToWorldPoint(eventData.position);
 
         //Загальне зміщення курсору (пальця) щодо точки, звідки почався дрег:
@@ -64,7 +71,45 @@ public class Token : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         // Нагадаю, що Mathf.Clamp обмежує значення в заданих межах:
         // Mathf.Clamp(змінна, мінімальне значення, максимальне значення).Тепер ми можемо рухати
         // фішки полем, їх неможливо вивести за межі поля, і вони блокують один одного.
+
+        float currentFrameTokenDrag = Vector3.Distance(previousPosition, transform.position);
+        #region Note:
+        /*Примітка: якби ми просто рухали фішку по порожньому полю, без обмежень,
+          визначення зміщення можна було б використовувати значення об'єкта
+          PointerEventData, що передається в цей метод інтерфейсу автоматично -
+          delta. У цій змінній зберігається переміщення пойнтер в останньому кадрі. Або
+          можна було б використовувати клас Input:
+
+          Input.GetTouch(0).deltaPosition
+          Ця змінна дає нам зміну позиції тача на пристроях із сенсорним введенням. Але оскільки
+          у нас є обмежувачі руху фішки, ці методи нам не підходять.*/
+        #endregion
+
+        ///Код, який регулює звучання в залежності від швидкості переміщення:
+        
+        //Розраховуємо зміну частоти залежно від швидкості переміщення
+        //в обмеженому діапазоні (Clamp)
+        float clampedPitchDrag = Mathf.Clamp(currentFrameTokenDrag * 10, 0.9f, 1.05f);
+
+        //задаємо зміну частоти із застосуванням інтерполяції для пом'якшення переходів
+        m_audioSource.pitch = Mathf.Lerp(m_audioSource.pitch, clampedPitchDrag, 0.5f);
+
+        //Розраховуємо зміну гучності залежно від швидкості переміщення
+        //в обмеженому діапазоні (Clamp)
+        float clampedVolumeDrag = Mathf.Clamp(currentFrameTokenDrag * 10, 0.2f, 1.2f);
+
+        // застосовуємо інтерполяцію
+        float interpolatedDrag = Mathf.Lerp(m_audioSource.volume, clampedVolumeDrag - 0.2f, 0.7f);
+
+        //множимо на загальний рівень звуку, щоб регулятор гучності
+        //впливав на цей звук
+        m_audioSource.volume = interpolatedDrag * Controller.Instance.Audio.SfxVolume;
     }
+
+
+
+
+
 
 
     // метод, який вирівнюватиме фішку по сітці:
@@ -78,7 +123,10 @@ public class Token : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     public void OnEndDrag(PointerEventData eventData)
     {
         AlignOnGrid();
+
         Controller.Instance.TurnDone();
+
+        m_audioSource.Stop();
     }
 
     #region GetDragSpace(Explanation)
@@ -159,6 +207,13 @@ public class Token : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
         //Для того, щоб фішки при створенні додавали себе в масив
         Controller.Instance.TokensByTypes[m_tokenType].Add(this);
+
+        m_audioSource = gameObject.GetComponent<AudioSource>();
+
+        //Щоб фішки при знищенні поля також знищувалися,
+        //вони повинні бути дочірніми об'єктами.
+        //рядок “удочеріння” фішок
+        transform.SetParent(Controller.Instance.Field.transform); /// тут непонятно отчего "наследуется" первый transform
     }
 
     #region CheckSpace(Explanation)

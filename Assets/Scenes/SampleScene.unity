@@ -311,6 +311,18 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.gameMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d24e18115c4aebf4fb4ba15f8bb94b3a, type: 3}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d24e18115c4aebf4fb4ba15f8bb94b3a, type: 3}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.defaultClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d760313a20f56646ac36afc8f594beb, type: 3}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
       propertyPath: m_score.m_turnScoreBonus
       value: 10
       objectReference: {fileID: 0}
@@ -319,9 +331,25 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
       propertyPath: m_score.m_levelScoreBonus
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e0da46516e056e54a999fc85191b4e32, type: 3}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d760313a20f56646ac36afc8f594beb, type: 3}
+    - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
+      propertyPath: m_audio.sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: cec0ff9f697c1ae469066abf7a3af43f, type: 3}
     - target: {fileID: 5364464305253181930, guid: 2f0d919773e034b49a294cfbf342da14, type: 3}
       propertyPath: m_tokenColors.Array.data[0].b
       value: 0.40943396

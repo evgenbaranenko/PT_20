@@ -10,8 +10,9 @@ public class Controller : MonoBehaviour
         {
             if (m_instance == null)
             {
+                Debug.Log("123");
                 var controller =
-                Instantiate(Resources.Load("Game/Resurses/Prefabs/Controller")) as GameObject;
+                Instantiate(Resources.Load("Prefabs/Controller")) as GameObject;
                 Debug.Log(controller);
                 m_instance = controller.GetComponent<Controller>();
             }
@@ -30,6 +31,10 @@ public class Controller : MonoBehaviour
     // [SerializeField] private int m_tokenTypes;
 
     [SerializeField] private Color[] m_tokenColors;
+
+    [SerializeField] private Audio m_audio = new Audio();
+
+    public Audio Audio { get { return m_audio; } set { m_audio = value; } }
 
     private Field m_field;
 
@@ -165,11 +170,19 @@ public class Controller : MonoBehaviour
     {
         if (IsAllTokensConnected())
         {
+            Audio.PlaySound("Drop");
+
             Debug.Log("Win!");
+
             Score.AddLevelBonus();
+
             m_currentLevel++;
+
             Destroy(m_field.gameObject);
+
             InitializeLevel();
+
+            Audio.PlaySound("Victory");
         }
         else
         {
@@ -209,13 +222,16 @@ public class Controller : MonoBehaviour
             if (m_instance != this) Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+
+        Audio.SourceMusic = gameObject.AddComponent<AudioSource>();
+        Audio.SourceRandomPitchSFX = gameObject.AddComponent<AudioSource>();
+        Audio.SourceSFX = gameObject.AddComponent<AudioSource>();
     }
     private void Start()
     {
-        //ўоб ф≥шки при знищенн≥ пол€ також знищувалис€,
-        //вони повинн≥ бути доч≥рн≥ми об'Їктами.
-        //р€док Уудочер≥нн€Ф ф≥шок
-        transform.SetParent(Controller.Instance.Field.transform); /// тут непон€тно отчего "наследуетс€" первый transform
+        
+
+        Audio.PlayMusic(true);
     }
 }
 
