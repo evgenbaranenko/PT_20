@@ -16,7 +16,11 @@ public class LevelParameters
     public int FieldSize { get { return m_fieldSize; } }
     public int FreeSpace { get { return m_freeSpace; } }
     public int TokenTypes { get { return m_TokenTypes; } }
-    public int Turns { get { return m_turns; } }
+    public int Turns
+    {
+        get { return m_turns; }
+        set { m_turns = value; Hud.Instance.UpdateTurnsValue(m_turns); }
+    }
     public LevelParameters(int currentLevel)
     {
         //«б≥льшуЇтьс€ на 1 кожн≥ 4 р≥вн≥

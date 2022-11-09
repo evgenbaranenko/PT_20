@@ -12,7 +12,11 @@ public class Score
 
     [SerializeField] private int m_turnScoreBonus;
 
-    public int CurrentScore { get { return m_currentScore; } set { m_currentScore = value; } }
+    public int CurrentScore
+    {
+        get { return m_currentScore; }
+        set { m_currentScore = value; Hud.Instance.UpdateScoreValue(m_currentScore); }
+    }
 
     // додаватиме з поточного значення очок бонус за проходження   рівня
 
