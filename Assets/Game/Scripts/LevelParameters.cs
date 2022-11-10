@@ -19,7 +19,7 @@ public class LevelParameters
     public int Turns
     {
         get { return m_turns; }
-        set { m_turns = value; Hud.Instance.UpdateTurnsValue(m_turns); }
+        set { m_turns = value; Hud.Instance.UpdateTurnsValue(m_turns); Debug.Log(value); }
     }
     public LevelParameters(int currentLevel)
     {

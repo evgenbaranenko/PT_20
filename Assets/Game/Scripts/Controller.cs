@@ -168,13 +168,13 @@ public class Controller : MonoBehaviour
     // перемоги і виводить відповідне повідомлення в консоль.
     public void TurnDone()
     {
+        Audio.PlaySound("Drop");
         if (IsAllTokensConnected())
         {
-            Audio.PlaySound("Drop");
-
             Debug.Log("Win!");
 
             Score.AddLevelBonus();
+            Score.AddTurnBonus();
 
             m_currentLevel++;
 
@@ -189,6 +189,8 @@ public class Controller : MonoBehaviour
             Debug.Log("Continue...");
         }
     }
+           
+
     public void InitializeLevel()
     {
         m_level = new LevelParameters(m_currentLevel);

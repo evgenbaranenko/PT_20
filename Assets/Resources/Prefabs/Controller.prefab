@@ -52,7 +52,7 @@ MonoBehaviour:
     m_fieldSize: 0
     m_freeSpace: 2
     m_TokenTypes: 5
-    m_turns: 5
+    m_turns: 1
   m_tokenColors:
   - {r: 1, g: 0.66156125, b: 0.40943396, a: 0}
   - {r: 1, g: 0.30566037, b: 0.30566037, a: 0}

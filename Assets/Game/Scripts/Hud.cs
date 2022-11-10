@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
+    private static Hud m_instance;
+    public static Hud Instance { get { return m_instance; } }
+
     [SerializeField] private Text m_scoreValue;
 
     [SerializeField] private Text m_turnsValue;
-
-    private static Hud m_instance;
-    public static Hud Instance { get { return m_instance; } }
 
     [SerializeField] private Slider m_musicSlider;
 
@@ -29,11 +29,13 @@ public class Hud : MonoBehaviour
 
     public void UpdateTurnsValue(int value)
     {
-        m_turnsValue.text = value.ToString();
+        m_turnsValue.text = value.ToString(); Debug.Log(value);
     }
+      
+
     public void UpdateScoreValue(int value)
     {
-        m_scoreValue.text = value.ToString();
+        m_scoreValue.text = value.ToString(); 
     }
 
     public void ShowWindow(CanvasGroup window)
@@ -68,5 +70,9 @@ public class Hud : MonoBehaviour
     public void SetSoundVolume(float volume)
     {
         Controller.Instance.Audio.SfxVolume = volume;
+    }
+    private void Start()
+    {
+        //HideWindow();
     }
 }

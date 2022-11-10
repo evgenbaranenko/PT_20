@@ -18,7 +18,7 @@ public class Score
         set { m_currentScore = value; Hud.Instance.UpdateScoreValue(m_currentScore); }
     }
 
-    // додаватиме з поточного значення очок бонус за проходження   рівня
+    // додаватиме з поточного значення очок бонус за проходження рівня
 
     public void AddLevelBonus()
     {
@@ -28,7 +28,6 @@ public class Score
     // додавання бонусу за кожен збережений хід
     public void AddTurnBonus()
     {
-        CurrentScore += m_turnScoreBonus;
+        CurrentScore += m_turnScoreBonus; Debug.Log("AddTurnBonus");
     }
-
 }
