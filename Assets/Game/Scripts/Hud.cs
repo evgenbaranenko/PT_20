@@ -37,6 +37,12 @@ public class Hud : MonoBehaviour
         m_raycaster = gameObject.GetComponent<GraphicRaycaster>();
     }
 
+    //Цей метод відтворює звук, який гравець чує дуже часто - звук фішки, що відпускається.
+    public void PlayPreviewSound()
+    {
+        Controller.Instance.Audio.PlaySound("Drop");
+    }
+
     //Метод, який показує вікно LevelCompletedWindow
     public void CountScore(int to)
     {
