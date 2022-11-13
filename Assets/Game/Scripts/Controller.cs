@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour
         {
             if (m_instance == null)
             {
-                Debug.Log("123");
+
                 var controller =
                 Instantiate(Resources.Load("Prefabs/Controller")) as GameObject;
                 Debug.Log(controller);
@@ -169,27 +169,35 @@ public class Controller : MonoBehaviour
     public void TurnDone()
     {
         Audio.PlaySound("Drop");
+
         if (IsAllTokensConnected())
         {
             Debug.Log("Win!");
 
             Score.AddLevelBonus();
-            Score.AddTurnBonus();
 
             m_currentLevel++;
 
             Destroy(m_field.gameObject);
 
-            InitializeLevel();
+            //InitializeLevel();
+
+            Hud.Instance.CountScore(m_level.Turns);
 
             Audio.PlaySound("Victory");
         }
         else
         {
             Debug.Log("Continue...");
+
+            if (m_level.Turns > 0)
+            {
+                m_level.Turns--;
+            }
         }
     }
-           
+
+
 
     public void InitializeLevel()
     {
