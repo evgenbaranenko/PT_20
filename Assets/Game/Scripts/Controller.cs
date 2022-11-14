@@ -236,6 +236,9 @@ public class Controller : MonoBehaviour
         Audio.SourceMusic = gameObject.AddComponent<AudioSource>();
         Audio.SourceRandomPitchSFX = gameObject.AddComponent<AudioSource>();
         Audio.SourceSFX = gameObject.AddComponent<AudioSource>();
+
+        //Виклик завантаження опцій
+        DataStore.LoadOptions();
     }
 
     //скидае прогрес гри
@@ -248,10 +251,15 @@ public class Controller : MonoBehaviour
         Destroy(m_field.gameObject);
 
         InitializeLevel();
+        //зберігаемо ігровий прогрес
+        DataStore.SaveGame();
     }
 
     private void Start()
     {
         Audio.PlayMusic(true);
+
+        //Завантажування ігрового прогрессу
+        DataStore.LoadGame();
     }
 }

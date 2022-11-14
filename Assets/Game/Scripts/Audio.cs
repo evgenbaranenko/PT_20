@@ -72,6 +72,21 @@ public class Audio
 
     //гучність музики
     private float musicVolume = 1f;
+    public float MusicVolume
+    {
+        get
+        {
+            return musicVolume;
+        }
+        set
+        {
+            musicVolume = value;
+
+            SourceMusic.volume = musicVolume;
+
+            DataStore.SaveOptions();
+        }
+    }
 
     //гучність звуків
     private float sfxVolume = 1f;
@@ -110,15 +125,7 @@ public class Audio
         set { sourceRandomPitchSFX = value; }
     }
 
-    public float MusicVolume
-    {
-        get { return musicVolume; }
-        set
-        {
-            musicVolume = value;
-            SourceMusic.volume = musicVolume;
-        }
-    }
+
     public float SfxVolume
     {
         get { return sfxVolume; }
@@ -130,6 +137,8 @@ public class Audio
             SourceSFX.volume = sfxVolume;
 
             SourceRandomPitchSFX.volume = sfxVolume;
+
+            DataStore.SaveOptions();
 
         }
     }

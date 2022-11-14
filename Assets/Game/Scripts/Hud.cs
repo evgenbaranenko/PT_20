@@ -72,6 +72,9 @@ public class Hud : MonoBehaviour
             Controller.Instance.Score.AddTurnBonus();
         }
 
+        //зберігаемо ігровий прогрес
+        DataStore.SaveGame();
+
         m_raycaster.enabled = true;
     }
 
